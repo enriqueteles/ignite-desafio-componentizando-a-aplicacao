@@ -3,7 +3,7 @@ import { Button } from "./Button";
 interface SideBarProps {
   genres: Genre[],
   selectedGenreId: number,
-  setGenreId(n: number): any,
+  setGenreId(n: number): void,
 }
 
 export function SideBar(props: SideBarProps) {

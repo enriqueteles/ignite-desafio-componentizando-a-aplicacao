@@ -16,11 +16,12 @@ import './styles/content.scss';
 
 export function App() {
   const [selectedGenreId, setSelectedGenreId] = useState(1);
-
   const [genres, setGenres] = useState<Genre[]>([]);
-
-  
   const [selectedGenre, setSelectedGenre] = useState<Genre>({} as Genre);
+
+  function changeSelectedGenreId(newGenreId: number): void {
+    setSelectedGenreId(newGenreId);
+  }
 
   useEffect(() => {
     api.get<Genre[]>('genres').then(response => {
@@ -37,7 +38,7 @@ export function App() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'row' }}>
-      <SideBar genres={genres} selectedGenreId={selectedGenreId} setGenreId={setSelectedGenreId}></SideBar>
+      <SideBar genres={genres} selectedGenreId={selectedGenreId} setGenreId={changeSelectedGenreId}></SideBar>
       <Content selectedGenre={selectedGenre}></Content>
     </div>
   )
