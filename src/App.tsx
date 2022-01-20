@@ -19,7 +19,7 @@ export function App() {
 
   const [genres, setGenres] = useState<Genre[]>([]);
 
-  const [movies, setMovies] = useState<Movie[]>([]);
+  
   const [selectedGenre, setSelectedGenre] = useState<Genre>({} as Genre);
 
   useEffect(() => {
@@ -29,10 +29,6 @@ export function App() {
   }, []);
 
   useEffect(() => {
-    api.get<Movie[]>(`movies/?Genre_id=${selectedGenreId}`).then(response => {
-      setMovies(response.data);
-    });
-
     api.get<Genre>(`genres/${selectedGenreId}`).then(response => {
       setSelectedGenre(response.data);
     })
@@ -42,7 +38,7 @@ export function App() {
   return (
     <div style={{ display: 'flex', flexDirection: 'row' }}>
       <SideBar genres={genres} selectedGenreId={selectedGenreId} setGenreId={setSelectedGenreId}></SideBar>
-      <Content movies={movies} selectedGenre={selectedGenre}></Content>
+      <Content selectedGenre={selectedGenre}></Content>
     </div>
   )
 }
